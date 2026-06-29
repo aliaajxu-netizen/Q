@@ -1,0 +1,6 @@
+{
+  "name": "تطبيق مدرسي — أسماء الاستفهام",
+  "description": "تطبيق ويب تعليمي تفاعلي متكامل لتقييم الذات والتدريب الشامل على أسماء الاستفهام (أي وكم) وقواعد اللغة العربية للصف السادس الإعدادي في العراق",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
