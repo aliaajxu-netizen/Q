@@ -16,7 +16,7 @@ export default function WelcomeScreen({ onStartTraining, totalQuestions }: Welco
       >
         <img 
           className="home-logo" 
-          src="/madrasati_logo.png" 
+          src="./madrasati_logo.png" 
           alt="شعار مدرسي" 
         />
       </motion.div>
@@ -27,7 +27,7 @@ export default function WelcomeScreen({ onStartTraining, totalQuestions }: Welco
         transition={{ delay: 0.1 }}
         className="home-title font-sans leading-normal"
       >
-        الأسئلة الوزارية حول أسماء الاستفهام "أي - كم" لقواعد اللغة العربية للصف السادس الإعدادي
+        الأسئلة الوزارية حول أسماء الاستفهام المجموعة الثالثة "أي - كم" لقواعد اللغة العربية للصف السادس الإعدادي
       </motion.h1>
 
       <motion.p 

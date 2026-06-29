@@ -18,12 +18,12 @@ export default function Navbar({ activeTab, setActiveTab, theme, toggleTheme }: 
       >
         <img 
           className="brand-logo" 
-          src="/madrasati_logo.png" 
+          src="./madrasati_logo.png" 
           alt="منصة مدرسي" 
           onError={(e) => {
             const target = e.currentTarget;
             if (target.src.indexOf('.jpg') === -1) {
-              target.src = '/madrasati_logo.jpg';
+              target.src = './madrasati_logo.jpg';
             } else {
               target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><rect width="100%" height="100%" fill="%235B2596"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif" font-size="10" font-weight="bold">مدرسي</text></svg>';
             }
