@@ -197,7 +197,7 @@ export default function App() {
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => {
-            alert("📥 جاري تحضير وتحميل ملزمة وقواعد أسماء الاستفهام (المجموعة الأولى) PDF المعتمدة من وزارة التربية العراقية...");
+            alert("📥 جاري تحضير وتحميل ملزمة وقواعد أسماء الاستفهام (أي - كم) PDF المعتمدة من وزارة التربية العراقية...");
           }}
           className="h-12 w-12 rounded-full bg-rose-600 text-white font-black text-xs shadow-lg hover:bg-rose-700 hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
           title="تحميل ملزمة أسماء الاستفهام PDF"

@@ -27,7 +27,7 @@ export default function WelcomeScreen({ onStartTraining, totalQuestions }: Welco
         transition={{ delay: 0.1 }}
         className="home-title font-sans leading-normal"
       >
-        الأسئلة الوزارية حول أسماء الاستفهام المجموعة الأولى (مَنْ - مَنْ ذا، ما - ماذا) لقواعد اللغة العربية للصف السادس الإعدادي
+        الأسئلة الوزارية حول أسماء الاستفهام "أي - كم" لقواعد اللغة العربية للصف السادس الإعدادي
       </motion.h1>
 
       <motion.p 
@@ -46,21 +46,21 @@ export default function WelcomeScreen({ onStartTraining, totalQuestions }: Welco
         className="home-steps-card"
       >
         <h3 className="home-steps-title font-sans">طريقة العمل المختصرة في المنصة:</h3>
-        <ul class="home-steps-list">
+        <ul className="home-steps-list">
           <li>
-            <span class="home-steps-num">١</span>
+            <span className="home-steps-num">١</span>
             <span>اكتب جوابك الشخصي كاملاً وبكل أمانة في الحقل المخصص.</span>
           </li>
           <li>
-            <span class="home-steps-num">٢</span>
+            <span className="home-steps-num">٢</span>
             <span>اضغط على زر (أظهر الجواب النموذجي) للمقارنة الدقيقة مع المصدر.</span>
           </li>
           <li>
-            <span class="home-steps-num">٣</span>
+            <span className="home-steps-num">٣</span>
             <span>قيّم جوابك يا بطل بموضوعية واختر الدرجة المناسبة من (0 إلى 10).</span>
           </li>
           <li>
-            <span class="home-steps-num">٤</span>
+            <span className="home-steps-num">٤</span>
             <span>حدّد مستوى تمكنك من السؤال لمراجعة نقاط ضعفك لاحقاً بكل سهولة.</span>
           </li>
         </ul>
