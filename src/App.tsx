@@ -6,76 +6,133 @@ import Dashboard from './components/Dashboard';
 import { questionsData } from './questions';
 import { motion, AnimatePresence } from 'motion/react';
 
+const safeLocalStorage = {
+  getItem: (key: string): string | null => {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      console.warn("localStorage is not accessible:", e);
+      return null;
+    }
+  },
+  setItem: (key: string, value: string): void => {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn("localStorage is not accessible:", e);
+    }
+  },
+  removeItem: (key: string): void => {
+    try {
+      localStorage.removeItem(key);
+    } catch (e) {
+      console.warn("localStorage is not accessible:", e);
+    }
+  }
+};
+
 export default function App() {
   // --- 1. Persistent State Initialization ---
   const [activeTab, setActiveTab] = useState<"home" | "training" | "dashboard">(() => {
-    const saved = localStorage.getItem("madrasati_active_tab");
-    return (saved as any) || "home";
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_active_tab");
+      return (saved as any) || "home";
+    } catch (e) {
+      return "home";
+    }
   });
 
   const [theme, setTheme] = useState<"light" | "dark">(() => {
-    const saved = localStorage.getItem("madrasati_theme");
-    return (saved as any) || "light";
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_theme");
+      return (saved as any) || "light";
+    } catch (e) {
+      return "light";
+    }
   });
 
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>(() => {
-    const saved = localStorage.getItem("madrasati_answers");
-    return saved ? JSON.parse(saved) : {};
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_answers");
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
   });
 
   const [scores, setScores] = useState<Record<number, number>>(() => {
-    const saved = localStorage.getItem("madrasati_scores");
-    return saved ? JSON.parse(saved) : {};
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_scores");
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
   });
 
   const [mastery, setMastery] = useState<Record<number, "unmastered" | "partial" | "mastered" | "">> (() => {
-    const saved = localStorage.getItem("madrasati_mastery");
-    return saved ? JSON.parse(saved) : {};
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_mastery");
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
   });
 
   const [revealed, setRevealed] = useState<Record<number, boolean>>(() => {
-    const saved = localStorage.getItem("madrasati_revealed");
-    return saved ? JSON.parse(saved) : {};
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_revealed");
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
   });
 
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
-    const saved = localStorage.getItem("madrasati_current_index");
-    return saved ? parseInt(saved) : 0;
+    try {
+      const saved = safeLocalStorage.getItem("madrasati_current_index");
+      return saved ? parseInt(saved) : 0;
+    } catch (e) {
+      return 0;
+    }
   });
 
   // --- 2. Side Effects for Persistence ---
   useEffect(() => {
-    localStorage.setItem("madrasati_active_tab", activeTab);
+    safeLocalStorage.setItem("madrasati_active_tab", activeTab);
   }, [activeTab]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_theme", theme);
+    safeLocalStorage.setItem("madrasati_theme", theme);
     // Apply theme class to html tag
-    if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
-      document.documentElement.removeAttribute("data-theme");
+    try {
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+    } catch (e) {
+      console.warn(e);
     }
   }, [theme]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_answers", JSON.stringify(userAnswers));
+    safeLocalStorage.setItem("madrasati_answers", JSON.stringify(userAnswers));
   }, [userAnswers]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_scores", JSON.stringify(scores));
+    safeLocalStorage.setItem("madrasati_scores", JSON.stringify(scores));
   }, [scores]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_mastery", JSON.stringify(mastery));
+    safeLocalStorage.setItem("madrasati_mastery", JSON.stringify(mastery));
   }, [mastery]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_revealed", JSON.stringify(revealed));
+    safeLocalStorage.setItem("madrasati_revealed", JSON.stringify(revealed));
   }, [revealed]);
 
   useEffect(() => {
-    localStorage.setItem("madrasati_current_index", currentIndex.toString());
+    safeLocalStorage.setItem("madrasati_current_index", currentIndex.toString());
   }, [currentIndex]);
 
   // Event listener for contextual finish action from TrainingHub
@@ -125,11 +182,11 @@ export default function App() {
     setMastery({});
     setRevealed({});
     setCurrentIndex(0);
-    localStorage.removeItem("madrasati_answers");
-    localStorage.removeItem("madrasati_scores");
-    localStorage.removeItem("madrasati_mastery");
-    localStorage.removeItem("madrasati_revealed");
-    localStorage.removeItem("madrasati_current_index");
+    safeLocalStorage.removeItem("madrasati_answers");
+    safeLocalStorage.removeItem("madrasati_scores");
+    safeLocalStorage.removeItem("madrasati_mastery");
+    safeLocalStorage.removeItem("madrasati_revealed");
+    safeLocalStorage.removeItem("madrasati_current_index");
   };
 
   return (
